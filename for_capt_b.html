@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Virtual Gift Box! 🎉</title>
+    <style>
+        /* CSS for a celebratory, blue/nautical theme */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e6faff; /* Very light, cool blue/sky color */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .gift-box {
+            max-width: 500px;
+            padding: 40px;
+            background-color: #f8ffff; /* Slightly lighter white for contrast */
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: 8px solid #a0c4ff; /* Light, bright blue border (silver-lining effect) */
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease-in-out;
+            z-index: 5;
+        }
+        
+        h1 {
+            color: #0077b6; /* Classic nautical blue for title */
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 3;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #0077b6; /* Main button color (Nautical Blue) */
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            position: relative;
+            z-index: 3;
+        }
+
+        .cta-button:hover {
+            background-color: #005f93; /* Slightly darker blue on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- New styles for the message box --- */
+        #special-message {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #005f93; /* Darker navy dashed border */
+            border-radius: 10px;
+            text-align: left;
+            background-color: #f0f8ff; /* Alice Blue - very light, soft blue background */
+            display: none; 
+            white-space: pre-wrap;
+            font-size: 1.2em;
+            color: #004d66; /* Darker blue text */
+        }
+
+        /* --- Cake Styles (interactive) --- */
+        .cake-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .cake-wrapper { /* New wrapper for interactivity */
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .cake-img {
+            max-width: 70%; /* Set to 70% for a "medium" size relative to the container */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Styles for the flame element (sits on top of the image) */
+        .flame {
+            position: absolute;
+            width: 3%; /* Slightly larger for visibility */
+            height: 4%;
+            background-color: #ffcc00; /* Yellow-orange flame color */
+            border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%; /* Flame shape */
+            opacity: 1;
+            transition: opacity 0.3s ease-out;
+            box-shadow: 0 0 8px 2px rgba(255, 165, 0, 0.7); /* Glow effect */
+        }
+        
+        /* Central position for the single flame (Adjusted to be near the top center of the image) */
+        .flame-1 { 
+            top: 25%; 
+            left: 48%; 
+            transform: rotate(0deg); 
+        }
+
+        /* Flame disappears when 'blown-out' class is added */
+        .flame.blown-out {
+            opacity: 0;
+            box-shadow: none; /* Remove glow when blown out */
+        }
+
+        #blow-instruction { 
+            margin-top: 10px;
+            font-size: 1em;
+            color: #005f93;
+            font-weight: bold;
+        }
+        
+        /* The main custom message is now hidden until the candle is blown out */
+        #custom-birthday-message {
+            display: none; 
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #a0c4ff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gift-box">
+        <h1>🎁 A Virtual Surprise Awaits!</h1>
+        <p>
+            Captain B, since we can't hand you a physical gift right now, here is a little something special just for you.
+            <br>
+            A token of appreciation for your hard work and calm demeanor.
+        </p>
+        
+        <button id="open-gift-btn" class="cta-button" onclick="revealMessage()">
+            CLICK TO OPEN YOUR GIFT
+        </button>
+
+        <p class="message" id="instruction-message">
+            (P.S. This is your special message!)
+        </p>
+
+        <div id="special-message">
+            <!-- Spotify Playlist Embedded Player --><div style="text-align: center; margin-bottom: 25px; padding: 0; background-color: #f0f8ff; border-radius: 10px;">
+                <p style="font-size: 1em; font-weight: bold; margin-bottom: 10px; color: #005f93;">🎧 Here is your Calm Seas Playlist!</p>
+                <iframe 
+                    style="border-radius:10px; width: 100%; height: 352px;" 
+                    src="https://open.spotify.com/embed/playlist/4OFLEFnjgnUSbxlBybIXhR?utm_source=generator" 
+                    frameBorder="0" 
+                    allowfullscreen="" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <!-- Cake with blowable candle -->
+            <div class="cake-container">
+                <div class="cake-wrapper" id="cake-wrapper" onclick="blowOutCandles()">
+                    <img src="https://www.dropbox.com/scl/fi/374qxtjg8nb9xn3wsdl97/bday_cake.jpg?rlkey=0inx5gkxfn5192ptwi2p0sise&st=nx1gv6yt&dl=1" alt="Birthday Cake" class="cake-img">
+                    <!-- The single, virtual flame -->
+                    <div class="flame flame-1" id="flame-1"></div>
+                </div>
+                <p id="blow-instruction">Make a wish, Captain B! Click the cake to blow out the candle.</p>
+                <!-- This message is now hidden by default and is revealed when the candle is blown out -->
+                <p id="wish-granted-message" style="display: none; margin-top: 10px; font-size: 1.1em; color: #0077b6; font-weight: bold;">Wish granted, Capt! 😘</p>
+            </div>
+            
+            <!-- The entire custom message content is now wrapped and hidden until candle is blown out -->
+            <div id="custom-birthday-message">
+                Happiest Birthday, Captain B! ⚓🎂
+                
+                Hope you’re doing well d’yan sa barko. 
+                Must be tough sometimes being far
+                from home, but I know kaya mo ‘yan—
+                you’ve always had that calm and
+                steady vibe—
+                parang dagat na kahit malalim,
+                peaceful pa rin 🌊
+
+                Wishing you calm seas, safe travels,
+                and quiet moments. 
+                Where you can just breathe and
+                feel content.
+                You deserve peace and happiness,
+                not just today but every day.
+
+                Enjoy your day, kahit simple lang. 
+                Minsan kasi, ‘yung mga tahimik
+                na celebration—
+                ‘yun pa ‘yung may pinaka-meaning. 
+                Ingat palagi, Dadi.
+                
+                The world’s big, but may mga
+                taong genuinely wishing you well—
+                from afar. 
+
+                😌🎉
+                ⚓❤️
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function revealMessage() {
+            // 1. Show the hidden message box
+            document.getElementById('special-message').style.display = 'block';
+            
+            // 2. Hide the main instruction paragraph
+            document.getElementById('instruction-message').style.display = 'none';
+
+            // 3. Change the button text and disable it
+            let button = document.getElementById('open-gift-btn');
+            button.innerHTML = "🎁 Message Received! ⚓";
+            button.disabled = true;
+            button.style.backgroundColor = '#999999'; // Gray out the button
+        }
+
+        function blowOutCandles() {
+            // Target the single central flame and add 'blown-out' class to make it disappear
+            document.getElementById(`flame-1`).classList.add('blown-out');
+
+            // Change instruction text: Hide instructions
+            document.getElementById('blow-instruction').style.display = 'none';
+            // Show the immediate 'Wish granted' message
+            document.getElementById('wish-granted-message').style.display = 'block';
+            
+            // REVEAL the entire custom message content
+            document.getElementById('custom-birthday-message').style.display = 'block';
+
+            // Disable further clicks on the cake wrapper
+            document.getElementById('cake-wrapper').onclick = null;
+            document.getElementById('cake-wrapper').style.cursor = 'default';
+        }
+    </script>
+</body>
+</html>
